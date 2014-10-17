@@ -9,7 +9,7 @@ $password = isset($_ENV['PDO_PORT']) ? $_ENV['PDO_PORT'] : '3306';
 $dbname = isset($_ENV['PDO_DBNAME']) ? $_ENV['PDO_DBNAME'] : 'datastore';
 
 // MySQL connection.
-$db = new PDO("$driver:host=$host;dbname=$dbname;charset=utf8", $user, $password);
+$db = new PDO("$driver:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Create the schema.
