@@ -1,0 +1,21 @@
+web:
+  build: .
+  ports:
+    - "8080:80"
+  volumes:
+    - .:/app
+  links:
+    - mysql
+  environment:
+    - PDO_DRIVER: mysql
+    - PDO_HOST: mysql
+    - PDO_USER: root
+    - PDO_PASSWORD: root
+    - PDO_PORT: "3306"
+mysql:
+  image: robloach/forge-mysql
+  expose:
+    - "3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: datastore
