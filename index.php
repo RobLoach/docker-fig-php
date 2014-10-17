@@ -1,12 +1,19 @@
 <?php
 
-// Set the configuration variables.
-$driver = isset($_ENV['PDO_DRIVER']) ? $_ENV['PDO_DRIVER'] : 'mysql';
-$host = isset($_ENV['PDO_HOST']) ? $_ENV['PDO_HOST'] : null;
-$user = isset($_ENV['PDO_USER']) ? $_ENV['PDO_USER'] : 'root';
-$password = isset($_ENV['PDO_PASSWORD']) ? $_ENV['PDO_PASSWORD'] : 'root';
-$password = isset($_ENV['PDO_PORT']) ? $_ENV['PDO_PORT'] : '3306';
-$dbname = isset($_ENV['PDO_DBNAME']) ? $_ENV['PDO_DBNAME'] : 'datastore';
+// Get the configuration variables.
+$variables = array(
+	'driver' => 'mysql',
+	'host' => 'localhost',
+	'user' => 'root',
+	'password' => 'root',
+	'port' => '3306',
+	'dbname' => 'datastore',
+);
+foreach ($variables as $name => $default) {
+	$value = getenv('PDO_' . strtoupper($name));
+	$values[$name] = !empty($value) ? $value : $default;
+}
+extract($values);
 
 // MySQL connection.
 $db = new PDO("$driver:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
@@ -37,7 +44,7 @@ else {
 	));
 }
 
-// @todo Making a dictionary with PDO is silly. We should just use a PDO
+// @todo Making a dictionary with PDO seems silly. We should just use a PDO
 // dictionary adaptor, or something.
 
 // Display the output.
