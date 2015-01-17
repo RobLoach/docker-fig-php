@@ -1,5 +1,5 @@
-# Start from Forge https://github.com/robloach/forge
-FROM robloach/forge
+# Start from Dockie https://github.com/robloach/dockie
+FROM dockie/dockie
 
 # When run, set up the PHP web server.
 CMD ["php", "-S", "0.0.0.0:80"]
